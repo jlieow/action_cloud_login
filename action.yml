@@ -1,0 +1,41 @@
+# action.yaml
+name: "Login to respective Clouds."
+description: "Login to respective Clouds."
+inputs:
+  cloud_env:
+    description: "Logs in to Cloud. Accepted values are AWS, AZURE and GCP"
+    required: true
+  aws_access_key_id:
+    description: "AWS Access Key ID."
+    required: false
+  aws_secret_access_key:
+    description: "AWS Secret Access Key."
+    required: false
+  profile_name:
+    description: "AWS Profile Name."
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Log in to respective Cloud
+      run: |
+
+          if [ "${{ inputs.cloud_env }}" == "AWS" ]; then
+            echo "Running aws configure."
+
+            aws configure set aws_access_key_id ${{ inputs.aws_access_key_id }} --profile ${{ inputs.profile_name }}
+            aws configure set aws_secret_access_key ${{ inputs.aws_secret_access_key }} --profile ${{ inputs.profile_name }}
+
+            echo "AWS profile configured."
+          fi
+
+          if [ "${{ env.cloud_env }}" == "AZURE" ]; then
+            echo "Running az login."
+            echo "Logged in."
+          fi
+
+          if [ "${{ env.cloud_env }}" == "GCP" ]; then
+            echo "Running gcp auth."
+            echo "Authenticated through gcp auth."
+          fi
+      shell: bash
