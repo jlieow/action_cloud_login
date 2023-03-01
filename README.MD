@@ -1,4 +1,4 @@
-Logs in to AWS with the AWS CLI
+Logs in to AWS, Azure and GCP with their respective CLI
 
 Example:
 
@@ -7,7 +7,7 @@ Example:
   id: cloud_login
   uses: jlieow/action_cloud_login@V1 # Uses an action in the repo terraformx_apply owned by jlieow tagged as V1
   with:
-    cloud_env: INPUT_CLOUD_ENV
+    cloud_env: INPUT_CLOUD_ENV (Accepted values are AWS | Azure | GCP) 
     aws_access_key_id: INPUT_AWS_ACCESS_KEY_ID
     aws_secret_access_key: INPUT_AWS_SECRET_ACCESS_KEY
     profile_name: INPUT_PROFILE_NAME
